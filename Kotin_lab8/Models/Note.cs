@@ -22,6 +22,13 @@ namespace Kotin_lab8.Models
         {
             head = hd;
             task = tsk;
+            PathImage = "NULL";
+        }
+        public Note(string hd, string tsk , string pth)
+        {
+            head = hd;
+            task = tsk;
+            PathImage = pth;
         }
 
         string? pathimage = null;
@@ -31,7 +38,7 @@ namespace Kotin_lab8.Models
             set
             {
                 pathimage = value;
-                NotifyPropertyChanged();
+                if (value != "NULL") Image = new Bitmap(value);
             }
         }
 

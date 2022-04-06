@@ -1,15 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Avalonia.Controls;
+using Avalonia.Media.Imaging;
+using Avalonia.Interactivity;
 using System.ComponentModel;
 using ReactiveUI;
 using System.Reactive;
-using Avalonia.Media;
-using Kotin_lab8.Models;
-using Avalonia.Controls;
-using Avalonia.Interactivity;
-using Avalonia.Media.Imaging;
 using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+
+using Kotin_lab8.Models;
 
 namespace Kotin_lab8.ViewModels
 {
@@ -34,7 +36,7 @@ namespace Kotin_lab8.ViewModels
             });
             ButtonAddImage = ReactiveCommand.Create<Note, Unit>((item) =>
             {
-                GetPath(item);
+                OpenImage(item);
                 return Unit.Default;
             });
 
@@ -81,17 +83,20 @@ namespace Kotin_lab8.ViewModels
         public ReactiveCommand<Note, Unit> DeleteCompleted { get; }
         public ReactiveCommand<Note, Unit> ButtonAddImage { get; }
 
-        private async void GetPath(Note item)
-        {   
-            var taskPath = new OpenFileDialog()
+        private async void OpenImage(Note item)
+        {
+            var taskPathOut = new OpenFileDialog()
             {
                 Title = "Choose file",
                 Filters = null
-            };
-            string[]? path2 = await taskPath.ShowAsync((Window)this.VisualRoot);
-            if (path2 != null) item.PathImage = string.Join(@"\", path2);
-        }
+            }.ShowAsync(view);
 
-        public Window? view = (Window)this.VisualRoot;
+            string[]? path2 = await taskPathOut;
+            if (path2 != null)
+            {
+                item.PathImage = string.Join(@"\", path2);
+            }
+        }
+        public Window? view;
     }
 }

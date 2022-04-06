@@ -10,11 +10,11 @@
 
 	
 
-	<Grid RowDefinitions="20*,50*,350*,30*" ColumnDefinitions="*,*,*" ShowGridLines="True">
-		<DockPanel Grid.Row="0">
+	<Grid RowDefinitions="30*,35*,355*,30*" ColumnDefinitions="*,*,*" ShowGridLines="False">
+		<DockPanel Grid.Row="0" Grid.ColumnSpan="3" Background="LightGoldenrodYellow">
 			<Menu DockPanel.Dock="Top" VerticalAlignment="Top">
 				<MenuItem Header="_File">
-					<MenuItem Name="New" Header="Save"/>
+					<MenuItem Name="New" Header="New"/>
 					<MenuItem Name="Save" Header="Save"/>
 					<MenuItem Name="Load" Header="Load"/>
 					<Separator/>
@@ -24,17 +24,19 @@
 				</MenuItem>
 			</Menu>
 		</DockPanel>
-		<TextBlock Text="Запланировано" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Grid.Column="0" Grid.Row="1"/>
-		<ListBox Items="{Binding Scheduled}" SelectionMode="Single" Grid.Column="0" Grid.Row="2">
+		<Border Background="LightBlue" Grid.Row="1" BorderThickness="2, 2, 2, 2" BorderBrush="Black">
+			<TextBlock  Text="Запланировано" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Grid.Column="0" Grid.Row="1"/>
+		</Border>
+			<ListBox Background="LightBlue" Items="{Binding Scheduled}" SelectionMode="Single" Grid.Column="0" Grid.Row="2">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<Expander Header="{Binding Head}" HorizontalAlignment="Stretch" >
+					<Expander  Header="{Binding Head}" HorizontalAlignment="Stretch" >
 						<StackPanel>
 							<TextBlock Text="Header:"/>
 							<TextBox Text="{Binding Head}" MinWidth="300" />
 							<TextBlock Text="Task:"/>
 							<TextBox  Text="{Binding Task}" MinWidth="300" MinHeight="150" TextWrapping="Wrap"/>
-							<Image Source="{Binding PathImage}"/>
+							<Image Source="{Binding Image}"/>
 							<Button Content="Add Image" Command="{Binding $parent[ItemsControl].DataContext.ButtonAddImage}" CommandParameter="{Binding}" HorizontalAlignment="Stretch"/>
 							<Button Content="Delete" Command="{Binding $parent[ItemsControl].DataContext.DeleteScheduled}" CommandParameter="{Binding}" HorizontalAlignment="Stretch"/>
 						</StackPanel>
@@ -42,9 +44,11 @@
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox> 
-		<Button Content="Add" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Name="Add0" Grid.Row="3" Grid.Column="0"/>
-		<TextBlock Text="В работе" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Grid.Column="1" Grid.Row="1"/>
-		<ListBox Items="{Binding InWork}" SelectionMode="Single" Grid.Column="1" Grid.Row="2">
+		<Button Background="LightGoldenrodYellow" Content="Add" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Name="Add0" Grid.Row="3" Grid.Column="0"/>
+		<Border Background="LightBlue" BorderThickness="2, 2, 2, 2" BorderBrush="Black" Grid.Column="1" Grid.Row="1">
+			<TextBlock Text="В работе" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" />
+		</Border>
+			<ListBox Background="LightBlue" Items="{Binding InWork}" SelectionMode="Single" Grid.Column="1" Grid.Row="2">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<Expander Header="{Binding Head}" HorizontalAlignment="Stretch" >
@@ -53,16 +57,19 @@
 							<TextBox Text="{Binding Head}" MinWidth="300" />
 							<TextBlock Text="Task:"/>
 							<TextBox  Text="{Binding Task}" MinWidth="300" MinHeight="150" TextWrapping="Wrap"/>
-							<Image Source="{Binding PathImage}"/>
+							<Image Source="{Binding Image}"/>
+							<Button Content="Add Image" Command="{Binding $parent[ItemsControl].DataContext.ButtonAddImage}" CommandParameter="{Binding}" HorizontalAlignment="Stretch"/>
 							<Button Content="Delete" Command="{Binding $parent[ItemsControl].DataContext.DeleteInWork}" CommandParameter="{Binding}" HorizontalAlignment="Stretch"/>
 						</StackPanel>
 					</Expander>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>
-		<Button Content="Add" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Name="Add1" Grid.Row="3" Grid.Column="1"/>
-		<TextBlock Text="Завершено" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Grid.Column="2" Grid.Row="1"/>
-		<ListBox Items="{Binding Completed}" SelectionMode="Single" Grid.Column="2" Grid.Row="2">
+		<Button Background="LightGoldenrodYellow" Content="Add" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Name="Add1" Grid.Row="3" Grid.Column="1"/>
+			<Border Background="LightBlue"  BorderThickness="2, 2, 2, 2" BorderBrush="Black" Grid.Column="2" Grid.Row="1">
+				<TextBlock Text="Завершено" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" />
+			</Border>
+				<ListBox Background="LightBlue" Items="{Binding Completed}" SelectionMode="Single" Grid.Column="2" Grid.Row="2">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<Expander Header="{Binding Head}" HorizontalAlignment="Stretch" >
@@ -71,14 +78,22 @@
 							<TextBox Text="{Binding Head}" MinWidth="300" />
 							<TextBlock Text="Task:"/>
 							<TextBox  Text="{Binding Task}" MinWidth="300" MinHeight="150" TextWrapping="Wrap"/>
-							<Image Source="{Binding PathImage}"/>
+							<Image Source="{Binding Image}"/>
+							<Button Content="Add Image" Command="{Binding $parent[ItemsControl].DataContext.ButtonAddImage}" CommandParameter="{Binding}" HorizontalAlignment="Stretch"/>
 							<Button Content="Delete" Command="{Binding $parent[ItemsControl].DataContext.DeleteCompleted}" CommandParameter="{Binding}" HorizontalAlignment="Stretch"/>
 						</StackPanel>
 					</Expander>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>
-		<Button Content="Add" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Name="Add2" Grid.Row="3" Grid.Column="2"/>
+		<Button Background="LightGoldenrodYellow" Content="Add" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Name="Add2" Grid.Row="3" Grid.Column="2"/>
+		<Border Grid.Row="2" Grid.Column="0"  BorderThickness="2, 2, 2, 2" BorderBrush="Black"/>
+		<Border Grid.Row="2" Grid.Column="1" BorderThickness="2, 2, 2, 2" BorderBrush="Black"/>
+		<Border Grid.Row="2" Grid.Column="2" BorderThickness="2, 2, 2, 2" BorderBrush="Black"/>
+		<Border Grid.Row="3" Grid.Column="0" BorderThickness="2, 2, 2, 2" BorderBrush="Black"/>
+		<Border Grid.Row="3" Grid.Column="1" BorderThickness="2, 2, 2, 2" BorderBrush="Black"/>
+		<Border Grid.Row="3" Grid.Column="2" BorderThickness="2, 2, 2, 2" BorderBrush="Black"/>
+		<Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" BorderThickness="2, 2, 2, 1" BorderBrush="Black"/>
 
 	</Grid>
 	

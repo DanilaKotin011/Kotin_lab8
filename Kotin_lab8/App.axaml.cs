@@ -21,6 +21,7 @@ namespace Kotin_lab8
                 {
                     DataContext = new MainWindowViewModel(),
                 };
+                (desktop.MainWindow.DataContext as MainWindowViewModel).view = desktop.MainWindow;
             }
 
             base.OnFrameworkInitializationCompleted();
